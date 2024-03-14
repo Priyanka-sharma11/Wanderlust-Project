@@ -21,7 +21,7 @@ router.get('/search/:filter',wrapAsync(listingController.filterIndex));
 
 //NEW ROUTE
 router.get('/new',isLoggedIn,listingController.renderNewForm);
-
+ 
 
 //Show ROUTE
 //UPDATE ROUTE
