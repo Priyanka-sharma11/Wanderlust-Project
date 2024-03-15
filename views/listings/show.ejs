@@ -1,34 +1,21 @@
 <% layout('/layouts/boilerplate')%>
 
 <style>
-@media(max-width:768px){
-    .starability-result{
-    display:none;
- }
-}
 
-@media(min-width:768px){
-    .rating_para{
-        display:none;
-    }
-}
 
 @media(max-width:430px){
     .rating_author{
-        font-size:1rem;
+        font-size:1.2rem;
     }
 }
 
-.rating_author{
-    height:2.9rem;
-}
 </style>
 
 <div class="row mt-3">
-    <div class="col-8 offset-3">
+    <div class="col-8 offset-2">
         <h3><%= listing.title%></h3>
     </div>
-    <div class="card col-6 offset-3 show-card listing-card">
+    <div class="card col-6 offset-2 show-card listing-card">
             <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing-image">                
             <div class="card-body">
                     <p class="card-text"> Owned by <i><%=listing.owner.username%></i></p>
@@ -51,7 +38,7 @@
 
   
 
-<div class="col-8 offset-3 mt-3 mb-3">
+<div class="col-8 offset-2 mt-3 mb-3">
         <hr>
             
     <% if(currUser){ %>
@@ -94,16 +81,14 @@
        <h5 class="mb-3"><b>All Reviews</b></h5>
        <div class="row">
             <% for(review of listing.reviews){ %>
-            <div class="card col-5 mb-3 ms-3">
+            <div class="card review-card mb-3 ms-3 pb-1">
 
                 <div class="card-body">
-                       <h5 class="card-title rating_author">@<%=review.author.username%></h5>
+                       <h5 class="card-title rating_author pt-1 pb-1">@<%=review.author.username%></h5>
                         <hr>                      
-                       <p class="rating_para"><%= review.rating %> stars</p>
                        <p class="starability-result card-text" data-rating=<%= review.rating %>></p> 
                        <p class="card-text"><%= review.comment %></p>
                 </div>
-
 
                 <% if(currUser && review.author.equals(currUser._id)){%>
                 <form class="mb-3 mt-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
