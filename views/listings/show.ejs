@@ -1,4 +1,29 @@
 <% layout('/layouts/boilerplate')%>
+
+<style>
+@media(max-width:768px){
+    .starability-result{
+    display:none;
+ }
+}
+
+@media(min-width:768px){
+    .rating_para{
+        display:none;
+    }
+}
+
+@media(max-width:430px){
+    .rating_author{
+        font-size:1rem;
+    }
+}
+
+.rating_author{
+    height:2.9rem;
+}
+</style>
+
 <div class="row mt-3">
     <div class="col-8 offset-3">
         <h3><%= listing.title%></h3>
@@ -72,14 +97,19 @@
             <div class="card col-5 mb-3 ms-3">
 
                 <div class="card-body">
-                       <h5 class="card-title">@<%=review.author.username%></h5>
+                       <h5 class="card-title rating_author">@<%=review.author.username%></h5>
+                        <hr>                      
+                       <p class="rating_para"><%= review.rating %> stars</p>
                        <p class="starability-result card-text" data-rating=<%= review.rating %>></p> 
                        <p class="card-text"><%= review.comment %></p>
                 </div>
 
+
+                <% if(currUser && review.author.equals(currUser._id)){%>
                 <form class="mb-3 mt-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
                     <button class="btn btn-sm btn-dark">Delete</button>
                 </form>
+                <%}%>
             </div>
             <% } %>
         </div>
