@@ -23,9 +23,11 @@ const listingRouter = require('./routes/listings.js');      //routers
 const reviewRouter = require('./routes/reviews.js');         //routers
 const userRouter = require('./routes/users.js');
 
-
+ 
 const dbUrl = process.env.ATLASDB_URL;
  
+console.log("Node:", process.version);
+console.log("DB URL exists:", !!process.env.ATLASDB_URL);
 main().then(()=>{
     console.log('connected to db');
 })
@@ -43,7 +45,7 @@ async function main(){
    
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
-app.use(express.urlencoded({entended:true}));
+app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
@@ -120,7 +122,6 @@ app.use((err,req,res,next)=>{
     //res.status(status).send(message);
 })
 
-app.listen(8080,()=>{
+app.listen(3000,()=>{
     console.log('server is listening');
-}); 
-       
+});
